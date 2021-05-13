@@ -4,6 +4,8 @@ from matplotlib.backends.backend_tkagg import ( FigureCanvasTkAgg, NavigationToo
 from matplotlib.figure import Figure
 import tkinter as tk
 from tkinter import ttk
+import numpy as np 
+import matplotlib.pyplot as plt
 
 
 class Interpolation(tk.Tk):
@@ -53,13 +55,14 @@ class mainMenu(tk.Frame):
 
         button3 = ttk.Button(self, text="Newton Forward Interpolation",command=lambda: controller.show_frame(Newton))
         button3.pack()
+        
 
 
 class Introduction(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
-        label = tk.Label(self, text="Introduction", font=fixed_font)
+        label = tk.Label(self, text="Introduction : Linear Interpolation", font=fixed_font)
         label.pack(pady=10,padx=10)
 
         button1 = ttk.Button(self, text="Back to Main", command=lambda: controller.show_frame(mainMenu))
@@ -67,7 +70,6 @@ class Introduction(tk.Frame):
 
         button2 = ttk.Button(self, text="Langrange",command=lambda: controller.show_frame(Langrange))
         button2.pack()
-
 
 class Langrange(tk.Frame):
 
@@ -82,6 +84,24 @@ class Langrange(tk.Frame):
         button2 = ttk.Button(self, text="Page One",command=lambda: controller.show_frame(Introduction))
         button2.pack()
 
+# basic langrange 
+        
+#not yet implemented to tkinter 
+x =np.array([0, 20, 40, 60, 80, 100], float)
+y =np.array([26.0, 48.6, 61.6, 71.2, 74.8, 75.2], float) 
+
+xplt = np.linspace(x[0], x[-1])
+yplt = np.array([], float)
+
+for xp in xplt:
+    yp = 0
+
+    for xi,yi in zip(x,y): #iterator of array x and y 
+        yp += yi * np.prod(( xp - x[x != xi]) / (xi - x[x != xi]))
+    yplt = np.append(yplt,yp)
+
+ 
+
 
 class Newton(tk.Frame):
 
@@ -92,10 +112,14 @@ class Newton(tk.Frame):
 
         button1 = ttk.Button(self, text="Back to Main",command=lambda: controller.show_frame(mainMenu))
         button1.pack()
- 
 
- 
+
+        entryN  = ttk.Entry(self)
+        entryN.pack() 
+
 fixed_font= ("Times New Roman", 12)
 
 app = Interpolation()
 app.mainloop()
+
+
