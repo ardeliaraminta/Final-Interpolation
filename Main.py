@@ -84,6 +84,28 @@ class Introduction(Frame):
         Frame.__init__(self, master)
         self.config(bg = "white")
 
+        x1 = [0,20,40,60,80,100]
+        y1 = [26,48.6, 64.3, 71.2, 74.8, 80.9]
+
+        m = len(x1)
+        n = m-1 #degree of polynomials 
+
+        xp1 = float(input("enter x: ")) # create an entry box that takes x values 
+
+        # with the initial value of 0 and create a function to calculate the yp  
+        yp1 = 0 
+
+        for i in range(n+1):
+            p = 1
+            for j in range(n+1):
+                if j != 1:
+                    p += (xp1- x1[j]- x1[i] )
+            yp1+= y1[i] * p
+
+
+        #print(' for x = %.2f, y = %f' % (xp1,yp1))
+
+
 
 
 
@@ -91,7 +113,7 @@ class Introduction(Frame):
 
         x =np.array([0, 20, 40, 60, 80, 100], float)
         y =np.array([26.0, 48.6, 61.6, 71.2, 74.8, 75.2], float) 
-        
+
         xplt = np.linspace(x[0], x[-1])
         yplt = np.array([], float)
         
