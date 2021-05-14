@@ -12,6 +12,9 @@ import numpy as np
 import tkinter.font as font
 
 
+
+
+
 class Interpolation(Tk):
 # the main frame 
 
@@ -20,8 +23,7 @@ class Interpolation(Tk):
         self._frame = None
         self.title("Interpolation")
         self.switchFrame(mainMenu)
-        self.geometry('800x600')
-        self.config(bg = "black")
+        self.config(bg = "white")
 
 #switch in between the frames 
 
@@ -44,21 +46,29 @@ class Interpolation(Tk):
 class mainMenu(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "black")
+        self.config(bg = "white")
 
         label = Label(self, text = "Computational Mathematics"\
                       , bg = "blue", fg = "white")
-        label.pack()
+
+        label.config(font=("Courier", 20))
+        label.pack(padx = 15, pady = 15)
 
         labelName = Label(self, text = "by Rohan, Raphael, and Ardelia")
+        labelName.config(font=("Courier", 11))
         labelName.pack() 
        
-        button = Button(self, text = "Introduction", width = 20, command = lambda: master.switchFrame(Introduction))
-        button.pack(padx = 10, pady = 10)
-        button2 = Button(self, text = "Langrange", width = 20, command = lambda: master.switchFrame(Langrange))
-        button2.pack()
-        button3 = Button(self, text = "Exit", width = 20, command = self.close)
-        button3.pack(padx = 10, pady = 10)
+        button = Button(self, text = "Introduction", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(Introduction))
+        button.pack(padx = 10, pady = 5)
+
+        button2 = Button(self, text = "Langrange",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(Langrange))
+        button2.pack(padx = 10, pady = 5)
+
+        button3 = Button(self, text = "Newton",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(Newton))
+        button3.pack(padx = 10, pady = 5)
+
+        button4 = Button(self, text = "Exit", bg = "black", fg = "white",  width = 30, command = self.close)
+        button4.pack(padx = 10, pady = 5)
 
     def close(self):
         self.destroy()
@@ -68,7 +78,10 @@ class Introduction(Frame):
 
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "black")
+        self.config(bg = "white")
+
+
+
 
         #basic langrange 
 
@@ -83,12 +96,12 @@ class Introduction(Frame):
             for xi,yi in zip(x,y): #iterator of array x and y 
                 yp += yi * np.prod(( xp - x[x != xi]) / (xi - x[x != xi]))
             yplt = np.append(yplt,yp)
-            
+             
             
         f = Figure(figsize=(5,5), dpi = 100)
         a = f.add_subplot(111)
         a.plot(x,y, 'ro', xplt, yplt, 'b-')
-        
+
         canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
         canvas.draw()
         canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
@@ -98,11 +111,28 @@ class Introduction(Frame):
         toolbar.update()
         canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
+         #show the y value when x is known
+        labelLang = Label(self, text =x)
+        labelLang.pack() 
+
+        labelLang2 = Label(self, text =y)
+        labelLang2.pack() 
+
+
         buttonLang = Button(self, text = "MainMenu", width = 500, command = lambda: master.switchFrame(mainMenu))
         buttonLang.pack()
 
+        entry = Entry(self, textvariable = "getY")
+        entry.pack() 
+
 
 class Langrange(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.config(bg = "black")
+
+
+class Newton(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.config(bg = "black")
@@ -112,3 +142,6 @@ class Langrange(Frame):
 if __name__ == "__main__":
     app = Interpolation()
     app.mainloop()
+
+
+    #to change font size - label.config(font=("Helvetica", 44))
