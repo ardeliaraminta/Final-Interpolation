@@ -79,36 +79,33 @@ class mainMenu(Frame):
         exit()
 
 class Introduction(Frame):
+    global x1, y1
 
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "white")
+        self.config(bg = "black")
 
-        x1 = [0,20,40,60,80,100]
-        y1 = [26,48.6, 64.3, 71.2, 74.8, 80.9]
 
-        m = len(x1)
-        n = m-1 #degree of polynomials 
+        l1 = Label(self, text="Enter x: ")
+        l1.pack( side = LEFT)
 
-        xp1 = float(input("enter x: ")) # create an entry box that takes x values 
+        entry = Entry(self)
+        xp1 = entry.get()
 
-        # with the initial value of 0 and create a function to calculate the yp  
-        yp1 = 0 
+        entry.pack() 
 
-        for i in range(n+1):
-            p = 1
-            for j in range(n+1):
-                if j != 1:
-                    p += (xp1- x1[j]- x1[i] )
-            yp1+= y1[i] * p
+    
 
 
         #print(' for x = %.2f, y = %f' % (xp1,yp1))
 
 
 
-
-
+class Langrange(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.config(bg = "black")
+        
         #basic langrange 
 
         x =np.array([0, 20, 40, 60, 80, 100], float)
@@ -152,18 +149,20 @@ class Introduction(Frame):
         entry.pack() 
 
 
-class Langrange(Frame):
-    def __init__(self, master):
-        Frame.__init__(self, master)
-        self.config(bg = "black")
-
 
 class Newton(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.config(bg = "black")
 
-          
+
+
+
+x1 = [0,20,40,60,80,100]
+y1 = [26,48.6, 64.3, 71.2, 74.8, 80.9]
+         
+
+
 
 if __name__ == "__main__":
     app = Interpolation()
