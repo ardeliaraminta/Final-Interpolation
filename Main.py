@@ -51,24 +51,28 @@ class mainMenu(Frame):
         label = Label(self, text = "Computational Mathematics"\
                       , bg = "blue", fg = "white")
 
-        label.config(font=("Courier", 20))
+        label.config(font=("Courier", 21))
         label.pack(padx = 15, pady = 15)
 
         labelName = Label(self, text = "by Rohan, Raphael, and Ardelia")
-        labelName.config(font=("Courier", 11))
+        labelName.config(font=("Courier", 10))
         labelName.pack() 
        
         button = Button(self, text = "Introduction", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(Introduction))
         button.pack(padx = 10, pady = 5)
+        button.config(font=("Courier", 12))
 
         button2 = Button(self, text = "Langrange",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(Langrange))
         button2.pack(padx = 10, pady = 5)
+        button2.config(font=("Courier", 12))
 
         button3 = Button(self, text = "Newton",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(Newton))
         button3.pack(padx = 10, pady = 5)
-
+        button3.config(font=("Courier", 12))
+        
         button4 = Button(self, text = "Exit", bg = "black", fg = "white",  width = 30, command = self.close)
         button4.pack(padx = 10, pady = 5)
+        button4.config(font=("Courier", 12))
 
     def close(self):
         self.destroy()
