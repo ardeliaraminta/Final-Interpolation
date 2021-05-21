@@ -1,23 +1,28 @@
-
-x1 = [0,20,40,60,80,100]
-y1 = [26,48.6, 64.3, 71.2, 74.8, 80.9]
-
-m = len(x1)
-n = m-1 #degree of polynomials 
-
-xp1 = float(input("enter x: "))
-yp1 = 0 
-
-for i in range(n+1):
-    p = 1
-    for j in range(n+1):
-         if j != 1:
-             p += (xp1- x1[i]- x1[j] )
-    yp1+= y1[i] * p
+import numpy as np 
+import tkinter as tk 
+import matplotlib.pyplot as plt
 
 
-print(' for x = %.2f, y = %f' % (xp1,yp1))
+#functions 
 
+x =np.array([0, 20, 40, 60, 80, 100], float)
+y =np.array([26.0, 48.6, 61.6, 71.2, 74.8, 75.2], float) 
+
+xplt = np.linspace(x[0], x[-1])
+yplt = np.array([], float)
+
+for xp in xplt:
+    yp = 0
+    
+    for xi,yi in zip(x,y): #iterator of array x and y 
+        yp += yi * np.prod(( xp - x[x != xi]) / (xi - x[x != xi]))
+    yplt = np.append(yplt,yp)
+
+#print graph     
+plt.plot(x,y, 'ro', xplt, yplt, 'b-')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.show()
 
 def linear_interpolation(x0,y0,x1,y1,xp,yp):
     if yp==0:
@@ -26,6 +31,21 @@ def linear_interpolation(x0,y0,x1,y1,xp,yp):
     elif xp==0:
          xp=(yp-y0)/((y1-y0)/(x1-x0))+x0
          return xp
+
+#for xvalues
+def create_array(size):
+   arr= np.array(size)
+   for i in size:
+       arr[i]=input("Enter value: ")
+   return arr
+
+# for yvalues
+def create_yvalues_table(xvalues):
+    y = [[0 for i in range(xvalues.size)]
+        for j in range(xvalues.size)]
+    for i in xvalues.size:
+        y[i][0]=input("Enter value: ")
+    return y
 
 #calculating the value of u
 def u_cal_forward(u, n):
@@ -76,6 +96,7 @@ def u_cal_backward(u,n):
         temp = temp * (u + i)
     return temp
 
+    
 def newton_backward(xvalues,yvalues,x):
     n=len(xvalues)
     for i in range(1, n):
@@ -95,3 +116,6 @@ def newton_backward(xvalues,yvalues,x):
     
     print("Value at ", x, 
         " is ", round(ans, 6))
+    
+   
+
