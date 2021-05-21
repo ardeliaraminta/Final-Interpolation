@@ -24,6 +24,8 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.show()
 
+
+#linear 
 def linear_interpolation(x0,y0,x1,y1,xp,yp):
     if yp==0:
         yp= y0 + ((y1-y0)/(x1-x0)) * (xp - x0)
@@ -32,20 +34,10 @@ def linear_interpolation(x0,y0,x1,y1,xp,yp):
          xp=(yp-y0)/((y1-y0)/(x1-x0))+x0
          return xp
 
-#for xvalues
-def create_array(size):
-   arr= np.array(size)
-   for i in size:
-       arr[i]=input("Enter value: ")
-   return arr
 
-# for yvalues
-def create_yvalues_table(xvalues):
-    y = [[0 for i in range(xvalues.size)]
-        for j in range(xvalues.size)]
-    for i in xvalues.size:
-        y[i][0]=input("Enter value: ")
-    return y
+##############################################################################################################################
+#Newton
+
 
 #calculating the value of u
 def u_cal_forward(u, n):
@@ -96,6 +88,20 @@ def u_cal_backward(u,n):
         temp = temp * (u + i)
     return temp
 
+#for xvalues
+def create_array(size):
+   arr= np.array(size)
+   for i in size:
+       arr[i]=input("Enter value: ")
+   return arr
+
+# for yvalues
+def create_yvalues_table(xvalues):
+    y = [[0 for i in range(xvalues.size)]
+        for j in range(xvalues.size)]
+    for i in xvalues.size:
+        y[i][0]=input("Enter value: ")
+    return y
     
 def newton_backward(xvalues,yvalues,x):
     n=len(xvalues)
@@ -116,6 +122,50 @@ def newton_backward(xvalues,yvalues,x):
     
     print("Value at ", x, 
         " is ", round(ans, 6))
+
+
+######################################################################################################
+#Lagrange
+
+def create_xarray(size):
+    # Making numpy array of n & n x n size and initializing 
+    # to zero for storing x and y value along with differences of y
+    x = np.zeros((size))
+    # Reading data points
+    print('Enter data for x: ')
+    for i in range(size):
+        x[i] = float(input( 'x['+str(i)+']='))
+   
+    return x
+
+def create_yarray(size):
+
+    y = np.zeros((size))
+    print('Enter data for y: ')
+    for i in range(size):
+        y[i] = float(input( 'y['+str(i)+']='))
+    
+    return y
+
+def lagrange(size,xp,xarray,yarray):
+    
+    # Set interpolated value initially to zero
+    yp = 0
+
+    # Implementing Lagrange Interpolation
+    for i in range(size):
+        
+        p = 1
+        
+        for j in range(size):
+            if i != j:
+                p = p * (xp - xarray[j])/(xarray[i] - xarray[j])
+        
+        yp = yp + p * yarray[i]    
+
+    # Displaying output
+    print('Interpolated value at %.3f is %.3f.' % (xp, yp))
+
     
    
 
