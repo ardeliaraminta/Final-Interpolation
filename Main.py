@@ -115,12 +115,12 @@ class Introduction(Frame):
         frTombol = Frame(mainframe, bd=5)
         frTombol.pack(fill=BOTH, expand=YES)
 
-        self.btnCalculate = Button(frTombol, text='Calculate', command = self.calculate_linear)
+        self.btnCalculate = Button(frTombol, text='Calculate', command = self.linear_interpolation)
         self.btnCalculate.pack(side=LEFT, fill=BOTH, expand=YES)
 
 
 
-    def calculate_linear(self):
+    def linear_interpolation(self):
         try:
             x0Value = self.entryx0.get()
             x0 = int(x0Value)
@@ -171,57 +171,12 @@ class results(Frame):
         self.config(bg = "white")
 
 
-
-
-        # x =np.array([0, 20, 40, 60, 80, 100], float)
-        # y =np.array([26.0, 48.6, 61.6, 71.2, 74.8, 75.2], float) 
-
-        # xplt = np.linspace(x[0], x[-1])
-        # yplt = np.array([], float)
-        
-        # for xp in xplt:
-        #     yp = 0
-        #     for xi,yi in zip(x,y): #iterator of array x and y 
-        #         yp += yi * np.prod(( xp - x[x != xi]) / (xi - x[x != xi]))
-        #     yplt = np.append(yplt,yp)
-             
-            
-        # f = Figure(figsize=(5,5), dpi = 100)
-        # a = f.add_subplot(111)
-        # a.plot(x,y, 'ro', xplt, yplt, 'b-')
-
-        # canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
-        # canvas.draw()
-        # canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
-        
-        # toolbar = NavigationToolbar2Tk(canvas, self)
-        
-        # toolbar.update()
-        # canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
-
-        #  #show the y value when x is known
-        # labelLang = Label(self, text =x)
-        # labelLang.pack() 
-
-        # labelLang2 = Label(self, text =y)
-        # labelLang2.pack() 
-
-
-        buttonLang = Button(self, text = "MainMenu", width = 500, command = lambda: master.switchFrame(mainMenu))
-        buttonLang.pack()
-
-
-        #print(' for x = %.2f, y = %f' % (xp1,yp1))
-
-
 class Langrange(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.config(bg = "black")
         
         #basic langrange 
-
-
 
 
 class Newton(Frame):
