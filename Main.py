@@ -133,7 +133,7 @@ class Introduction(Frame):
             x1Value = self.entryx1.get()
             x1 = int(x1Value)
         except ValueError:
-            mb.showwarning('Wrong input', 'value is not valid')
+            mb.showwarning('Wrong input', 'Value entered is not valid')
             self.entryx1.focus_set()
             return
         
@@ -141,7 +141,7 @@ class Introduction(Frame):
             y0Value = self.entryy0.get()
             y0 = int(y0Value)
         except ValueError:
-            mb.showwarning('Wrong input', 'Age is not valid')
+            mb.showwarning('Wrong input', 'Value entered is not valid')
             self.entryy0.focus_set()
             return
 
@@ -149,7 +149,7 @@ class Introduction(Frame):
             y1Value= self.entryy1.get()
             y1= int(y1Value)
         except ValueError:
-            mb.showwarning('Wrong input', 'Age is not valid')
+            mb.showwarning('Wrong input', 'Value entered is not valid')
             self.entryy1.focus_set()
             return
 
@@ -157,7 +157,7 @@ class Introduction(Frame):
             xpValue = self.entryxp.get()
             xp = int(xpValue)
         except ValueError:
-            mb.showwarning('Wrong input', 'Age is not valid')
+            mb.showwarning('Wrong input', 'Value entered is not valid')
             self.entryxp.focus_set()
             return
         
