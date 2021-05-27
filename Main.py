@@ -255,7 +255,7 @@ class LinearInterpolation2(Frame):
             mb.showwarning('Wrong input', 'Value entered is not valid')
             self.entryxp.focus_set()
             return
-        
+    
         xp = 0 
         xp=(yp-y0)/((y1-y0)/(x1-x0))+x0
         Answer2 = xp
@@ -286,7 +286,8 @@ class Langrange(Frame):
         entryYValues = Entry(self, width = 30, bg = "white")
         entryYValues.pack()
 
-        def lang():
+        
+        def setX():
             """ it will take x values and y values 
              user has to enter values seperated by comma to create an array"""
             
@@ -299,17 +300,22 @@ class Langrange(Frame):
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryXValues.focus_set()
                 return
+           
+        def setY():
             try:
                 YValues = entryYValues.get().split(",")
                 yValue = [float(x) for x in YValues]
-                mb.showinfo("Y Values:", xValue)
+                mb.showinfo("Y Values:", yValue)
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryYValues.focus_set()
                 return
 
-        ButtonX = Button(self, text = "Submit",  command = lang)
+        ButtonX = Button(self, text = "Get X Values",  command = setX)
         ButtonX.pack() 
+
+        ButtonY = Button(self, text = "Get Y Values",  command = setY)
+        ButtonY.pack() 
 
        
 
