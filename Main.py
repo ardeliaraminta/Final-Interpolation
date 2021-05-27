@@ -10,7 +10,6 @@ from matplotlib.figure import Figure
 import tkinter as tk
 import numpy as np
 import tkinter.font as font
-import functions
 
 
 
@@ -57,7 +56,7 @@ class mainMenu(Frame):
         labelName.config(font=("Courier", 10))
         labelName.pack() 
        
-        button0 = Button(self, text = "Linear Interpolation y = 0", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation))
+        button0 = Button(self, text = "Linear Interpolation yp = 0", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation))
         button0.pack(padx = 10, pady = 5)
         button0.config(font=("Courier", 12))
 
@@ -177,10 +176,6 @@ class LinearInterpolation2(Frame):
 
     def __init__(self, master):
 
-
-        Frame.__init__(self, master)
-        self.config(bg = "black")
-
         mainframe = Frame(self, bd=50)
         mainframe.pack(fill=BOTH, expand=YES)
 
@@ -276,35 +271,58 @@ class results(Frame):
 class Langrange(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "black")
         
-        #basic langrange with set values 
+        labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
+        labelX.config(font=("Courier", 11))
+        labelX.pack()
 
-        x =np.array([0, 20, 40, 60, 80, 100], float)
-        y =np.array([26.0, 48.6, 61.6, 71.2, 74.8, 75.2], float) 
+        entryXValues = Entry(self, width = 30, bg = "white")
+        entryXValues.pack()
 
-        xplt = np.linspace(x[0], x[-1])
-        yplt = np.array([], float)
-        
-        for xp in xplt:
-            yp = 0
-            for xi,yi in zip(x,y): #iterator of array x and y 
-                yp += yi * np.prod(( xp - x[x != xi]) / (xi - x[x != xi]))
-            yplt = np.append(yplt,yp)
-             
+        labelY= Label(self, text = "Y Values Entries: ", bg = "black", fg = "white")
+        labelY.config(font=("Courier", 11))
+        labelY.pack()
+
+        entryYValues = Entry(self, width = 30, bg = "white")
+        entryYValues.pack()
+
+        def lang():
+            """ it will take x values and y values 
+             user has to enter values seperated by comma to create an array"""
             
-        f = Figure(figsize=(5,5), dpi = 100)
-        a = f.add_subplot(111)
-        a.plot(x,y, 'ro', xplt, yplt, 'b-')
+            try:
+                XValues = entryXValues.get().split(",")
+                xValue = [float(x) for x in XValues]
+                # to check if the value return
+                mb.showinfo("X Values:", xValue)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryXValues.focus_set()
+                return
+            try:
+                YValues = entryYValues.get().split(",")
+                yValue = [float(x) for x in YValues]
+                mb.showinfo("Y Values:", xValue)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryYValues.focus_set()
+                return
 
-        canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
-        canvas.draw()
-        canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        ButtonX = Button(self, text = "Submit",  command = lang)
+        ButtonX.pack() 
+
+       
+
+
+
+
+
+
+
         
-        toolbar = NavigationToolbar2Tk(canvas, self)
-        
-        toolbar.update()
-        canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+
+                
+
 
 
 
@@ -319,5 +337,13 @@ if __name__ == "__main__":
     app = Interpolation()
     app.mainloop()
 
+#FRONT END NOTES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
-    #to change font size - label.config(font=("Helvetica", 44))
+#to change font size - label.config(font=("Helvetica", 44))
+# entry = "0,8,0,1,0,0"
+
+# nameSplit = entry.split(",")
+# numbers = [int(x) for x in nameSplit]
+
+# print(nameSplit)
+# print(numbers)
