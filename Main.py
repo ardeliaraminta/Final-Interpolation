@@ -21,7 +21,7 @@ class Interpolation(Tk):
         self._frame = None
         self.title("Interpolation")
         self.switchFrame(mainMenu)
-        self.config(bg = "white")
+        self.config(bg ="powder blue")
 
 #switch in between the frames 
 
@@ -44,25 +44,25 @@ class Interpolation(Tk):
 class mainMenu(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "white")
+        self.config(bg = "powder blue")
 
         label = Label(self, text = "Computational Mathematics"\
-                      , bg = "blue", fg = "white")
+                      , bg = "DeepSkyBlue3", fg = "white")
 
         label.config(font=("Courier", 21))
         label.pack(padx = 15, pady = 15)
 
-        labelName = Label(self, text = "by Rohan, Raphael, and Ardelia")
+        labelName = Label(self, text = "by Rohan, Raphael, and Ardelia", fg = 'white', bg = "DodgerBlue4")
         labelName.config(font=("Courier", 10))
         labelName.pack() 
        
-        button0 = Button(self, text = "Linear Interpolation yp = 0", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation))
+        button0 = Button(self, text = "Linear Interpolation", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation))
         button0.pack(padx = 10, pady = 5)
         button0.config(font=("Courier", 12))
 
-        button = Button(self, text = "Linear Interpolation xp = 0", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation2))
-        button.pack(padx = 10, pady = 5)
-        button.config(font=("Courier", 12))
+        # button = Button(self, text = "Linear Interpolation xp = 0", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation))
+        # button.pack(padx = 10, pady = 5)
+        # button.config(font=("Courier", 12))
 
 
         button2 = Button(self, text = "Basic Langrange",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(Langrange))
@@ -82,184 +82,218 @@ class LinearInterpolation(Frame):
 
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "black")
-
-        mainframe = Frame(self, bd=50)
-        mainframe.pack(fill=BOTH, expand=YES)
-
-        frData = Frame(mainframe, bd=50)
-        frData.pack(fill=BOTH, expand=YES)
-
-        Label(frData, text='Linear Interpolation').grid(row=0, column=0, sticky=W)
-        self.name = Label(frData)
-
-        Label(frData, text='x0:').grid(row=1, column=0, sticky=W)
-        self.entryx0 = Entry(frData)
-        self.entryx0.grid(row=1, column=1)
-
-        Label(frData, text='x1:').grid(row=2, column=0, sticky=W)
-        self.entryx1 = Entry(frData)
-        self.entryx1.grid(row=2, column=1)
-
-        Label(frData, text='y0:').grid(row=3, column=0, sticky=W)
-        self.entryy0 = Entry(frData)
-        self.entryy0.grid(row=3, column=1)
         
-        Label(frData, text='y1:').grid(row=4, column=0, sticky=W)
-        self.entryy1 = Entry(frData)
-        self.entryy1.grid(row=4, column=1)
+        titleX = Label(text='Linear Interpolation')
+        titleX.pack()
 
-        Label(frData, text='xp:').grid(row=5, column=0, sticky=W)
-        self.entryxp = Entry(frData)
-        self.entryxp.grid(row=5, column=1)
+        labelx0= Label(self, text = "x0: ", bg = "white", fg = "black")
+        labelx0.config(font=("Courier", 10))
+        labelx0.pack()
 
-        frTombol = Frame(mainframe, bd=5)
-        frTombol.pack(fill=BOTH, expand=YES)
+        entryx0 = Entry(self, width = 30, bg = "white")
+        entryx0.pack()
 
-        frTombol = Frame(mainframe, bd=5)
-        frTombol.pack(fill=BOTH, expand=YES)
+        labelx1= Label(self, text = "x1: ", bg = "white", fg = "black")
+        labelx1.config(font=("Courier", 10))
+        labelx1.pack()
 
-        self.btnCalculate = Button(frTombol, text='Calculate', command = self.linear_interpolation)
-        self.btnCalculate.pack(side=LEFT, fill=BOTH, expand=YES)
+        entryx1 = Entry(self, width = 30, bg = "white")
+        entryx1.pack()
 
-    #linear interpolation
-    def linear_interpolation(self):
-        y = 0
-    
-        try:
-            x0Value = self.entryx0.get()
-            x0 = int(x0Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'value is not valid')
-            self.entryx0.focus_set()
-            return
+        labely0= Label(self, text = "y0: ", bg = "white", fg = "black")
+        labely0.config(font=("Courier", 10))
+        labely0.pack()
+
+        entryy0 = Entry(self, width = 30, bg = "white")
+        entryy0.pack()
+        
+        labely1= Label(self, text = "y1: ", bg = "white", fg = "black")
+        labely1.config(font=("Courier", 10))
+        labely1.pack()
+
+        entryy1 = Entry(self, width = 30, bg = "white")
+        entryy1.pack()
+
+        labelxp= Label(self, text = "xp: ", bg = "white", fg = "black")
+        labelxp.config(font=("Courier", 10))
+        labelxp.pack()
+
+        entryxp = Entry(self, width = 30, bg = "white")
+        entryxp.pack()
+
+
+
+        def linear_interpolation():
+            try:
+                x0Value = entryx0.get()
+                x0 = float(x0Value)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryx0.focus_set()
+                return
+                
+            try:
+                x1Value = entryx1.get()
+                x1 = float(x1Value)
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryx1.focus_set()
+                return
             
-        try:
-            x1Value = self.entryx1.get()
-            x1 = int(x1Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryx1.focus_set()
-            return
-        
-        try:
-            y0Value = self.entryy0.get()
-            y0 = int(y0Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryy0.focus_set()
-            return
-
-        try:
-            y1Value= self.entryy1.get()
-            y1= int(y1Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryy1.focus_set()
-            return
-
-        try:
-            xpValue = self.entryxp.get()
-            xp = int(xpValue)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryxp.focus_set()
-            return
-
-        yp = y0 + (y1-y0)/(x1-x0) * (xp - x0)
-        Answer = yp
-        mb.showinfo("Yp: ",Answer, parent = self)
-
-
-class LinearInterpolation2(Frame):
-    # linear Interpolation
-
-    def __init__(self, master):
-
-        mainframe = Frame(self, bd=50)
-        mainframe.pack(fill=BOTH, expand=YES)
-
-        frData = Frame(mainframe, bd=50)
-        frData.pack(fill=BOTH, expand=YES)
-
-        Label(frData, text='Linear Interpolation').grid(row=0, column=0, sticky=W)
-        self.name = Label(frData)
-
-        Label(frData, text='x0:').grid(row=1, column=0, sticky=W)
-        self.entryx0 = Entry(frData)
-        self.entryx0.grid(row=1, column=1)
-
-        Label(frData, text='x1:').grid(row=2, column=0, sticky=W)
-        self.entryx1 = Entry(frData)
-        self.entryx1.grid(row=2, column=1)
-
-        Label(frData, text='y0:').grid(row=3, column=0, sticky=W)
-        self.entryy0 = Entry(frData)
-        self.entryy0.grid(row=3, column=1)
-        
-        Label(frData, text='y1:').grid(row=4, column=0, sticky=W)
-        self.entryy1 = Entry(frData)
-        self.entryy1.grid(row=4, column=1)
-
-        Label(frData, text='yp:').grid(row=5, column=0, sticky=W)
-        self.entryyp = Entry(frData)
-        self.entryyp.grid(row=5, column=1)
-
-        frTombol = Frame(mainframe, bd=5)
-        frTombol.pack(fill=BOTH, expand=YES)
-
-        frTombol = Frame(mainframe, bd=5)
-        frTombol.pack(fill=BOTH, expand=YES)
-
-        self.btnCalculate = Button(frTombol, text='Calculate', command = self.linear_interpolation2)
-        self.btnCalculate.pack(side=LEFT, fill=BOTH, expand=YES)
-
-    #linear interpolation
-    def linear_interpolation2(self):
-        try:
-            x0Value = self.entryx0.get()
-            x0 = float(x0Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'value is not valid')
-            self.entryx0.focus_set()
-            return
+            if x0 > x1:
+                mb.showwarning("Error", " x0 should be less than x1")
+                return
             
-        try:
-            x1Value = self.entryx1.get()
-            x1 = float(x1Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryx1.focus_set()
-            return
+            try:
+                y0Value = entryy0.get()
+                y0 = float(y0Value)
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryy0.focus_set()
+                return
+
+            try:
+                y1Value = entryy1.get()
+                y1= float(y1Value)
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryy1.focus_set()
+                return
+
+            try:
+                xpValue = entryxp.get()
+                xp = float(xpValue)
+
+                if xp < x0 or xp > x1:
+                    mb.showwarning(" ERROR WARNING!!", "should be in between x0 and x1" )
+                    return
+
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryxp.focus_set()
+                return
+            
+            yp = y0 + (y1-y0)/(x1-x0) * (xp - x0)
+            Answer = yp
+            mb.showinfo("yp and graph ",Answer, parent = self)
+
+            f = Figure(figsize=(5,5), dpi = 100)
+            a = f.add_subplot(111)
+            a.plot(([x0, xp ,x1 ]),([y0, yp, y1]), 'ro',([x0, xp ,x1 ]),([y0, yp, y1]), 'b-')
+
+            canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
+            canvas.draw()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
         
-        try:
-            y0Value = self.entryy0.get()
-            y0 = float(y0Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryy0.focus_set()
-            return
+            toolbar = NavigationToolbar2Tk(canvas, self)
+        
+            toolbar.update()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        
+        button = Button(self, text = "Yp Value and Graph", bg = "black", fg = "white", width = 30, command = linear_interpolation)
+        button.pack(padx = 10, pady = 5)
+        button.config(font=("Courier", 12))
 
-        try:
-            y1Value= self.entryy1.get()
-            y1= float(y1Value)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryy1.focus_set()
-            return
 
-        try:
-            ypValue = self.entryyp.get()
-            yp = float(ypValue)
-        except ValueError:
-            mb.showwarning('Wrong input', 'Value entered is not valid')
-            self.entryxp.focus_set()
-            return
+
+
+
+
+
     
-        xp = 0 
-        xp=(yp-y0)/((y1-y0)/(x1-x0))+x0
-        Answer2 = xp
-        mb.showinfo("Xp: ",Answer2, parent = self)
+
+
+# class LinearInterpolation2(Frame):
+#     # linear Interpolation
+
+#     def __init__(self, master):
+
+#         mainframe = Frame(self, bd=50)
+#         mainframe.pack(fill=BOTH, expand=YES)
+
+#         frData = Frame(mainframe, bd=50)
+#         frData.pack(fill=BOTH, expand=YES)
+
+#         Label(frData, text='Linear Interpolation').grid(row=0, column=0, sticky=W)
+#         self.name = Label(frData)
+
+#         Label(frData, text='x0:').grid(row=1, column=0, sticky=W)
+#         self.entryx0 = Entry(frData)
+#         self.entryx0.grid(row=1, column=1)
+
+#         Label(frData, text='x1:').grid(row=2, column=0, sticky=W)
+#         self.entryx1 = Entry(frData)
+#         self.entryx1.grid(row=2, column=1)
+
+#         Label(frData, text='y0:').grid(row=3, column=0, sticky=W)
+#         self.entryy0 = Entry(frData)
+#         self.entryy0.grid(row=3, column=1)
+        
+#         Label(frData, text='y1:').grid(row=4, column=0, sticky=W)
+#         self.entryy1 = Entry(frData)
+#         self.entryy1.grid(row=4, column=1)
+
+#         Label(frData, text='yp:').grid(row=5, column=0, sticky=W)
+#         self.entryyp = Entry(frData)
+#         self.entryyp.grid(row=5, column=1)
+
+#         frTombol = Frame(mainframe, bd=5)
+#         frTombol.pack(fill=BOTH, expand=YES)
+
+#         frTombol = Frame(mainframe, bd=5)
+#         frTombol.pack(fill=BOTH, expand=YES)
+
+#         self.btnCalculate = Button(frTombol, text='Calculate', command = self.linear_interpolation2)
+#         self.btnCalculate.pack(side=LEFT, fill=BOTH, expand=YES)
+
+#     #linear interpolation
+#     def linear_interpolation2(self):
+#         try:
+#             x0Value = entryx0.get()
+#             x0 = float(x0Value)
+#         except ValueError:
+#             mb.showwarning('Wrong input', 'value is not valid')
+#             entryx0.focus_set()
+#             return
+            
+#         try:
+#             x1Value = entryx1.get()
+#             x1 = float(x1Value)
+#         except ValueError:
+#             mb.showwarning('Wrong input', 'Value entered is not valid')
+#             entryx1.focus_set()
+#             return
+        
+#         try:
+#             y0Value = entryy0.get()
+#             y0 = float(y0Value)
+#         except ValueError:
+#             mb.showwarning('Wrong input', 'Value entered is not valid')
+#             entryy0.focus_set()
+#             return
+
+#         try:
+#             y1Value = entryy1.get()
+#             y1= float(y1Value)
+#         except ValueError:
+#             mb.showwarning('Wrong input', 'Value entered is not valid')
+#             entryy1.focus_set()
+#             return
+
+#         try:
+#             ypValue = entryyp.get()
+#             yp = float(ypValue)
+#         except ValueError:
+#             mb.showwarning('Wrong input', 'Value entered is not valid')
+#             entryyp.focus_set()
+#             return
+    
+#         xp = 0 
+#         xp=(yp-y0)/((y1-y0)/(x1-x0))+x0
+#         Answer2 = xp
+#         mb.showinfo("Xp: ",Answer2, parent = self)
+
+
 
 
 class results(Frame):
@@ -305,7 +339,7 @@ class Langrange(Frame):
             try:
                 YValues = entryYValues.get().split(",")
                 yValue = [float(x) for x in YValues]
-                mb.showinfo("Y Values:", yValue)
+                mb.showinfo("Y Values:", yValue.length)
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryYValues.focus_set()
@@ -315,22 +349,19 @@ class Langrange(Frame):
         ButtonX.pack() 
 
         ButtonY = Button(self, text = "Get Y Values",  command = setY)
-        ButtonY.pack() 
+        ButtonY.pack()
+        
+        def lagrange(size,xp,yValue,xValue):
+            yp = 0 
+            for i in range(size):
+                p = 1
+            for j in range(size):
+                if i != j:
+                    p = p * (xp - xValue[j])/(xValue[i] - yValue[j])
+                    yp = yp + p * yValue[i]    
+                    print('Interpolated value at %.3f is %.3f.' % (xp, yp))
 
        
-
-
-
-
-
-
-
-        
-
-                
-
-
-
 
 class Newton(Frame):
     def __init__(self, master):
