@@ -200,108 +200,6 @@ class LinearInterpolation(Frame):
         buttonMain.config(font=("Courier", 12))
 
 
-
-
-
-
-
-
-    
-
-
-# class LinearInterpolation2(Frame):
-#     # linear Interpolation
-
-#     def __init__(self, master):
-
-#         mainframe = Frame(self, bd=50)
-#         mainframe.pack(fill=BOTH, expand=YES)
-
-#         frData = Frame(mainframe, bd=50)
-#         frData.pack(fill=BOTH, expand=YES)
-
-#         Label(frData, text='Linear Interpolation').grid(row=0, column=0, sticky=W)
-#         self.name = Label(frData)
-
-#         Label(frData, text='x0:').grid(row=1, column=0, sticky=W)
-#         self.entryx0 = Entry(frData)
-#         self.entryx0.grid(row=1, column=1)
-
-#         Label(frData, text='x1:').grid(row=2, column=0, sticky=W)
-#         self.entryx1 = Entry(frData)
-#         self.entryx1.grid(row=2, column=1)
-
-#         Label(frData, text='y0:').grid(row=3, column=0, sticky=W)
-#         self.entryy0 = Entry(frData)
-#         self.entryy0.grid(row=3, column=1)
-        
-#         Label(frData, text='y1:').grid(row=4, column=0, sticky=W)
-#         self.entryy1 = Entry(frData)
-#         self.entryy1.grid(row=4, column=1)
-
-#         Label(frData, text='yp:').grid(row=5, column=0, sticky=W)
-#         self.entryyp = Entry(frData)
-#         self.entryyp.grid(row=5, column=1)
-
-#         frTombol = Frame(mainframe, bd=5)
-#         frTombol.pack(fill=BOTH, expand=YES)
-
-#         frTombol = Frame(mainframe, bd=5)
-#         frTombol.pack(fill=BOTH, expand=YES)
-
-#         self.btnCalculate = Button(frTombol, text='Calculate', command = self.linear_interpolation2)
-#         self.btnCalculate.pack(side=LEFT, fill=BOTH, expand=YES)
-
-#     #linear interpolation
-#     def linear_interpolation2(self):
-#         try:
-#             x0Value = entryx0.get()
-#             x0 = float(x0Value)
-#         except ValueError:
-#             mb.showwarning('Wrong input', 'value is not valid')
-#             entryx0.focus_set()
-#             return
-            
-#         try:
-#             x1Value = entryx1.get()
-#             x1 = float(x1Value)
-#         except ValueError:
-#             mb.showwarning('Wrong input', 'Value entered is not valid')
-#             entryx1.focus_set()
-#             return
-        
-#         try:
-#             y0Value = entryy0.get()
-#             y0 = float(y0Value)
-#         except ValueError:
-#             mb.showwarning('Wrong input', 'Value entered is not valid')
-#             entryy0.focus_set()
-#             return
-
-#         try:
-#             y1Value = entryy1.get()
-#             y1= float(y1Value)
-#         except ValueError:
-#             mb.showwarning('Wrong input', 'Value entered is not valid')
-#             entryy1.focus_set()
-#             return
-
-#         try:
-#             ypValue = entryyp.get()
-#             yp = float(ypValue)
-#         except ValueError:
-#             mb.showwarning('Wrong input', 'Value entered is not valid')
-#             entryyp.focus_set()
-#             return
-    
-#         xp = 0 
-#         xp=(yp-y0)/((y1-y0)/(x1-x0))+x0
-#         Answer2 = xp
-#         mb.showinfo("Xp: ",Answer2, parent = self)
-
-
-
-
 class results(Frame):
      def __init__(self, master):
         Frame.__init__(self, master)
@@ -327,7 +225,7 @@ class Langrange(Frame):
         entryYValues.pack()
 
         
-        def setX():
+        def setXy():
             """ it will take x values and y values 
              user has to enter values seperated by comma to create an array"""
             
@@ -340,8 +238,6 @@ class Langrange(Frame):
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryXValues.focus_set()
                 return
-           
-        def setY():
             try:
                 YValues = entryYValues.get().split(",")
                 yValue = [float(x) for x in YValues]
@@ -351,21 +247,8 @@ class Langrange(Frame):
                 entryYValues.focus_set()
                 return
 
-        ButtonX = Button(self, text = "Get X Values",  command = setX)
-        ButtonX.pack() 
-
-        ButtonY = Button(self, text = "Get Y Values",  command = setY)
+        ButtonY = Button(self, text = "Get Y Values",  command = setXy)
         ButtonY.pack()
-        
-        def lagrange(size,xp,yValue,xValue):
-            yp = 0 
-            for i in range(size):
-                p = 1
-            for j in range(size):
-                if i != j:
-                    p = p * (xp - xValue[j])/(xValue[i] - yValue[j])
-                    yp = yp + p * yValue[i]    
-                    print('Interpolated value at %.3f is %.3f.' % (xp, yp))
 
        
 
