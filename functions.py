@@ -91,7 +91,7 @@ def u_cal_backward(u,n):
 #for xvalues
 def create_array(size):
    arr= np.array(size)
-   for i in size:
+   for i in arr:
        arr[i]=input("Enter value: ")
    return arr
 
