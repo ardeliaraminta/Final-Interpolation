@@ -82,9 +82,10 @@ class LinearInterpolation(Frame):
 
     def __init__(self, master):
         Frame.__init__(self, master)
-        
-        titleX = Label(text='Linear Interpolation')
+
+        titleX = Label(text='Linear Interpolation',  bg = "black", fg = "white")
         titleX.pack()
+        titleX.config(font= ("Courier", 13))
 
         labelx0= Label(self, text = "x0: ", bg = "white", fg = "black")
         labelx0.config(font=("Courier", 10))
@@ -193,6 +194,11 @@ class LinearInterpolation(Frame):
         button = Button(self, text = "Yp Value and Graph", bg = "black", fg = "white", width = 30, command = linear_interpolation)
         button.pack(padx = 10, pady = 5)
         button.config(font=("Courier", 12))
+
+        buttonMain = Button(self, text = " Main Menu", bg = "black", fg = "white", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain.pack(padx = 10, pady = 5)
+        buttonMain.config(font=("Courier", 12))
+
 
 
 
