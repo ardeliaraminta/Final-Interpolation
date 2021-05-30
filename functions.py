@@ -38,6 +38,21 @@ def linear_interpolation(x0,y0,x1,y1,xp,yp):
 ##############################################################################################################################
 #Newton
 
+#for xvalues
+def create_array(size):
+   arr=[]
+   for i in range(size):
+       arr.append(eval(input("Enter value: ")))
+   return arr
+
+# for yvalues
+def create_yvalues_table(size):
+    y = [[0 for i in range(size)]
+        for j in range(size)]
+    for i in range(size):
+        y[i][0]=eval(input("Enter value: "))
+    return y
+
 
 #calculating the value of u
 def u_cal_forward(u, n):
@@ -88,20 +103,6 @@ def u_cal_backward(u,n):
         temp = temp * (u + i)
     return temp
 
-#for xvalues
-def create_array(size):
-   arr= np.array(size)
-   for i in arr:
-       arr[i]=input("Enter value: ")
-   return arr
-
-# for yvalues
-def create_yvalues_table(xvalues):
-    y = [[0 for i in range(xvalues.size)]
-        for j in range(xvalues.size)]
-    for i in xvalues.size:
-        y[i][0]=input("Enter value: ")
-    return y
     
 def newton_backward(xvalues,yvalues,x):
     n=len(xvalues)

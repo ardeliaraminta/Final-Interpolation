@@ -3,17 +3,17 @@ from functions import u_cal_backward
 from functions import factorial
 #for xvalues
 def create_array(size):
-   arr=np.zeros(size)
-   for i in arr:
-       arr[i]=input("Enter value: ")
+   arr=[]
+   for i in range(size):
+       arr.append(eval(input("Enter value: ")))
    return arr
 
 # for yvalues
-def create_yvalues_table(xvalues):
-    y = [[0 for i in range(xvalues.size)]
-        for j in range(xvalues.size)]
-    for i in xvalues.size:
-        y[i][0]=input("Enter value: ")
+def create_yvalues_table(size):
+    y = [[0 for i in range(size)]
+        for j in range(size)]
+    for i in range(size):
+        y[i][0]=eval(input("Enter value: "))
     return y
     
 def newton_backward(xvalues,yvalues,x):
@@ -39,9 +39,9 @@ def newton_backward(xvalues,yvalues,x):
 arr=create_array(4)
 print(arr)
 
-yarr=create_yvalues_table(arr)
+yarr=create_yvalues_table(4)
 print(yarr)
 
-print(newton_backward(arr,yarr,1.9))
+print(newton_backward(arr,yarr,1.7))
 
 
