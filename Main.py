@@ -5,7 +5,6 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox as mb
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
-from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 import tkinter as tk
 import numpy as np
@@ -82,40 +81,37 @@ class LinearInterpolation(Frame):
 
     def __init__(self, master):
         Frame.__init__(self, master)
+        self.config(bg = "DodgerBlue4")
 
-        titleX = Label(text='Linear Interpolation',  bg = "black", fg = "white")
-        titleX.pack()
-        titleX.config(font= ("Courier", 13))
-
-        labelx0= Label(self, text = "x0: ", bg = "white", fg = "black")
+        labelx0= Label(self, text = "Value of x0: ", bg = "DodgerBlue4", fg = "white")
         labelx0.config(font=("Courier", 10))
         labelx0.pack()
 
         entryx0 = Entry(self, width = 30, bg = "white")
         entryx0.pack()
 
-        labelx1= Label(self, text = "x1: ", bg = "white", fg = "black")
+        labelx1= Label(self, text = "Value of x1: ", bg = "DodgerBlue4", fg = "white")
         labelx1.config(font=("Courier", 10))
         labelx1.pack()
 
         entryx1 = Entry(self, width = 30, bg = "white")
         entryx1.pack()
 
-        labely0= Label(self, text = "y0: ", bg = "white", fg = "black")
+        labely0= Label(self, text = "Value of y0: ", bg = "DodgerBlue4", fg = "white")
         labely0.config(font=("Courier", 10))
         labely0.pack()
 
         entryy0 = Entry(self, width = 30, bg = "white")
         entryy0.pack()
         
-        labely1= Label(self, text = "y1: ", bg = "white", fg = "black")
+        labely1= Label(self, text = "Value of y1: ", bg = "DodgerBlue4", fg = "white")
         labely1.config(font=("Courier", 10))
         labely1.pack()
 
         entryy1 = Entry(self, width = 30, bg = "white")
         entryy1.pack()
 
-        labelxp= Label(self, text = "xp: ", bg = "white", fg = "black")
+        labelxp= Label(self, text = "Value of xp: ", bg = "DodgerBlue4", fg = "white")
         labelxp.config(font=("Courier", 10))
         labelxp.pack()
 
@@ -209,6 +205,69 @@ class results(Frame):
 class Langrange(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
+
+        xValue = []
+        yValue = []
+        xp = 0
+
+        
+        def setx():
+            """ it will take x values and y values 
+             user has to enter values seperated by comma to create an array"""
+            
+            try:
+                XValues = entryXValues.get().split(",")
+                xValue = [float(x) for x in XValues]
+                # to check if the value return
+                mb.showinfo("X Values:", xValue)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryXValues.focus_set()
+                return
+
+        def sety():
+            try:
+                YValues = entryYValues.get().split(",")
+                yValue = [float(x) for x in YValues]
+                mb.showinfo("Y Values:", yValue.length)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryYValues.focus_set()
+                
+                
+            try:
+                xpValue = entryxp.get()
+                xp = float(xpValue)
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryxp.focus_set()
+                return
+
+
+        def lagrange(size,xp,xarray,yarray):
+            
+            # Set interpolated value initially to zero
+            yp = 0
+
+            # Implementing Lagrange Interpolation
+            for i in range(size):
+                
+                p = 1
+                
+                for j in range(size):
+                    if i != j:
+                        p = p * (xp - xarray[j])/(xarray[i] - xarray[j])
+                
+                yp = yp + p * yarray[i]
+            
+        def result_button_pressed(): 
+            setx()
+            sety()
+            lagrange(len(xValue), xp, xValue, yValue)
+
+        # Result = yp 
+        # mb.showinfo("yp: ",Result, parent = self)
+        # print(yp)
         
         labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
         labelX.config(font=("Courier", 11))
@@ -224,31 +283,34 @@ class Langrange(Frame):
         entryYValues = Entry(self, width = 30, bg = "white")
         entryYValues.pack()
 
-        
-        def setXy():
-            """ it will take x values and y values 
-             user has to enter values seperated by comma to create an array"""
-            
-            try:
-                XValues = entryXValues.get().split(",")
-                xValue = [float(x) for x in XValues]
-                # to check if the value return
-                mb.showinfo("X Values:", xValue)
-            except ValueError:
-                mb.showwarning('Wrong input', 'value is not valid')
-                entryXValues.focus_set()
-                return
-            try:
-                YValues = entryYValues.get().split(",")
-                yValue = [float(x) for x in YValues]
-                mb.showinfo("Y Values:", yValue.length)
-            except ValueError:
-                mb.showwarning('Wrong input', 'value is not valid')
-                entryYValues.focus_set()
-                return
+        labelxp= Label(self, text = "Value of xp: ", bg = "black", fg = "white")
+        labelxp.config(font=("Courier", 10))
+        labelxp.pack()
 
-        ButtonY = Button(self, text = "Get Y Values",  command = setXy)
-        ButtonY.pack()
+        entryxp = Entry(self, width = 30, bg = "white")
+        entryxp.pack()
+
+        buttonResult = Button(self, text = " boho ", bg = "DeepSkyBlue4", fg = "white", width = 25, command = lambda:lagrange(len(xValue),xp,xValue, yValue))
+        buttonResult.pack(padx = 10, pady = 5)
+        buttonResult.config(font=("Courier", 11))
+                
+
+
+        # ButtonY = Button(self, text = "Get Y Values",  command = setx)
+        # ButtonY.pack()
+
+        # ButtonX = Button(self, text = "Get X Values",  command = sety)
+        # ButtonX.pack()
+
+
+
+        # langrage interpolation 
+
+        
+        buttonMain2 = Button(self, text = " Main Menu", bg = "DeepSkyBlue4", fg = "white", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain2.pack(padx = 10, pady = 5)
+        buttonMain2.config(font=("Courier", 11))
+
 
        
 
