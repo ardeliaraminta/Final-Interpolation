@@ -187,11 +187,11 @@ class LinearInterpolation(Frame):
             toolbar.update()
             canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
         
-        button = Button(self, text = "Yp Value and Graph", bg = "black", fg = "white", width = 30, command = linear_interpolation)
+        button = Button(self, text = "Yp Value and Graph", bg = "white", fg = "black", width = 30, command = linear_interpolation)
         button.pack(padx = 10, pady = 5)
         button.config(font=("Courier", 12))
 
-        buttonMain = Button(self, text = " Main Menu", bg = "black", fg = "white", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain = Button(self, text = " Main Menu", bg = "white", fg = "black", width = 25, command = lambda: master.switchFrame(mainMenu))
         buttonMain.pack(padx = 10, pady = 5)
         buttonMain.config(font=("Courier", 12))
 
@@ -206,12 +206,9 @@ class Langrange(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
 
-        xValue = []
-        yValue = []
-        xp = 0
-
         
         def setx():
+            global xValue
             """ it will take x values and y values 
              user has to enter values seperated by comma to create an array"""
             
@@ -226,10 +223,13 @@ class Langrange(Frame):
                 return
 
         def sety():
+            global yValue
+            global xp
+
             try:
                 YValues = entryYValues.get().split(",")
                 yValue = [float(x) for x in YValues]
-                mb.showinfo("Y Values:", yValue.length)
+                mb.showinfo("Y Values:",yValue)
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryYValues.focus_set()
@@ -245,7 +245,7 @@ class Langrange(Frame):
 
 
         def lagrange(size,xp,xarray,yarray):
-            
+             
             # Set interpolated value initially to zero
             yp = 0
 
@@ -259,15 +259,29 @@ class Langrange(Frame):
                         p = p * (xp - xarray[j])/(xarray[i] - xarray[j])
                 
                 yp = yp + p * yarray[i]
-            
-        def result_button_pressed(): 
+                
+            Result = yp 
+            mb.showinfo("yp: ",Result, parent = self)
+
+            f = Figure(figsize=(5,5), dpi = 100)
+            a = f.add_subplot(111)
+            a.plot((xValue +[xp]),(yValue+[yp]), 'ro',(xValue +[xp]),(yValue+[yp]), 'b-')
+
+            canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
+            canvas.draw()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        
+            toolbar = NavigationToolbar2Tk(canvas, self)
+        
+            toolbar.update()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        
+        
+
+        def button_pressed():
             setx()
             sety()
-            lagrange(len(xValue), xp, xValue, yValue)
-
-        # Result = yp 
-        # mb.showinfo("yp: ",Result, parent = self)
-        # print(yp)
+            lagrange(len(xValue),xp, xValue, yValue)
         
         labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
         labelX.config(font=("Courier", 11))
@@ -290,7 +304,7 @@ class Langrange(Frame):
         entryxp = Entry(self, width = 30, bg = "white")
         entryxp.pack()
 
-        buttonResult = Button(self, text = " boho ", bg = "DeepSkyBlue4", fg = "white", width = 25, command = lambda:lagrange(len(xValue),xp,xValue, yValue))
+        buttonResult = Button(self, text = " boho ", bg = "DeepSkyBlue4", fg = "white", width = 25, command = button_pressed)
         buttonResult.pack(padx = 10, pady = 5)
         buttonResult.config(font=("Courier", 11))
                 
@@ -318,6 +332,13 @@ class Newton(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.config(bg = "black")
+    
+    #newton
+
+xValue = []
+yValue = []
+xp = 0
+
 
 
 
