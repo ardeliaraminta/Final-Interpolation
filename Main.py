@@ -9,6 +9,7 @@ from matplotlib.figure import Figure
 import tkinter as tk
 import numpy as np
 import tkinter.font as font
+import functions as fc
 
 
 
@@ -229,6 +230,7 @@ class Langrange(Frame):
             try:
                 YValues = entryYValues.get().split(",")
                 yValue = [float(x) for x in YValues]
+                print(len(yValue))
                 mb.showinfo("Y Values:",yValue)
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
@@ -331,28 +333,98 @@ class Langrange(Frame):
 class Newton(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
-        self.config(bg = "black")
-    
+        self.config(bg = "powder blue")   
+
+        def setx():
+            global xValueNewton
+            """ it will take x values and y values 
+             user has to enter values seperated by comma to create an array"""
+            
+            try:
+                xValueNewton = eval(entryXValues.get())
+                # to check if the value return
+                mb.showinfo("X Values:", xValueNewton)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryXValues.focus_set()
+                return 
+
+        def sety():
+            global yValueNewton
+            global valueNewton
+            global table
+
+            try:
+                yValueNewton = eval(entryYValues.get())
+                table = [[0 for i in range(len(yValueNewton))]
+                            for j in range(len(yValueNewton))]  
+                for i in range(len(yValueNewton)):
+                    table[i][0] = yValueNewton[i]
+                mb.showinfo("Y Values:", yValueNewton)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryYValues.focus_set()
+
+            try:
+                valueNewton = eval(entryZValues.get())
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryZValues.focus_set()
+                return
+        
+        
+
+        def button_pressed():  
+            setx()
+            sety()
+            answer = fc.newton_forward(xValueNewton,table,valueNewton)
+            mb.showinfo('yp value: ', answer, parent = self)
+
+  
+        
+
+
+        labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
+        labelX.config(font=("Courier", 11))
+        labelX.pack()        
+
+        entryXValues = Entry(self, width = 30, bg = "white")
+        entryXValues.pack()
+
+        labelY= Label(self, text = "Y Values Entries: ", bg = "black", fg = "white")
+        labelY.config(font=("Courier", 11))
+        labelY.pack()
+
+        entryYValues = Entry(self, width = 30, bg = "white")
+        entryYValues.pack()
+
+        labelZ= Label(self, text = "Value that needs to be found: ", bg = "black", fg = "white")
+        labelZ.config(font=("Courier", 11))
+        labelZ.pack()
+
+        entryZValues = Entry(self, width = 30, bg = "white")
+        entryZValues.pack()
+
+        button2 = Button(self, text = "SEt y", bg = "black", fg = "white", width = 30, command = button_pressed)
+        button2.pack(padx = 10, pady = 5)
+        button2.config(font=("Courier", 12))     
+
+
     #newton
 
 xValue = []
 yValue = []
 xp = 0
-
+xValueNewton = []
+yValueNewton = []
+valueNewton = 0
+sizexNewton = len(xValueNewton)
+sizeyNewton = len(yValueNewton)
+table = []
+   
 
 
 
 if __name__ == "__main__":
     app = Interpolation()
     app.mainloop()
-
-#FRONT END NOTES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
-#to change font size - label.config(font=("Helvetica", 44))
-# entry = "0,8,0,1,0,0"
-
-# nameSplit = entry.split(",")
-# numbers = [int(x) for x in nameSplit]
-
-# print(nameSplit)
-# print(numbers)
