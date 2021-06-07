@@ -69,9 +69,13 @@ class mainMenu(Frame):
         button2.pack(padx = 10, pady = 5)
         button2.config(font=("Courier", 12))
 
-        button3 = Button(self, text = "Newton",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(Newton))
+        button3 = Button(self, text = "Newton Forward",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(NewtonForward))
         button3.pack(padx = 10, pady = 5)
         button3.config(font=("Courier", 12))
+
+        button4 = Button(self, text = "Newton Backward",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(NewtonBackward))
+        button4.pack(padx = 10, pady = 5)
+        button4.config(font=("Courier", 12))        
 
     def close(self):
         self.destroy()
@@ -325,12 +329,9 @@ class Langrange(Frame):
         
         buttonMain2 = Button(self, text = " Main Menu", bg = "DeepSkyBlue4", fg = "white", width = 25, command = lambda: master.switchFrame(mainMenu))
         buttonMain2.pack(padx = 10, pady = 5)
-        buttonMain2.config(font=("Courier", 11))
+        buttonMain2.config(font=("Courier", 11))       
 
-
-       
-
-class Newton(Frame):
+class NewtonForward(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.config(bg = "powder blue")   
@@ -405,10 +406,88 @@ class Newton(Frame):
         entryZValues = Entry(self, width = 30, bg = "white")
         entryZValues.pack()
 
-        button2 = Button(self, text = "SEt y", bg = "black", fg = "white", width = 30, command = button_pressed)
+        button2 = Button(self, text = "The value of Y is: ", bg = "black", fg = "white", width = 30, command = button_pressed)
         button2.pack(padx = 10, pady = 5)
         button2.config(font=("Courier", 12))     
 
+class NewtonBackward(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.config(bg = "powder blue")   
+
+        def setx():
+            global xValueNewton
+            """ it will take x values and y values 
+             user has to enter values seperated by comma to create an array"""
+            
+            try:
+                xValueNewton = eval(entryXValues.get())
+                # to check if the value return
+                mb.showinfo("X Values:", xValueNewton)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryXValues.focus_set()
+                return 
+
+        def sety():
+            global yValueNewton
+            global valueNewton
+            global table
+
+            try:
+                yValueNewton = eval(entryYValues.get())
+                table = [[0 for i in range(len(yValueNewton))]
+                            for j in range(len(yValueNewton))]  
+                for i in range(len(yValueNewton)):
+                    table[i][0] = yValueNewton[i]
+                mb.showinfo("Y Values:", yValueNewton)
+            except ValueError:
+                mb.showwarning('Wrong input', 'value is not valid')
+                entryYValues.focus_set()
+
+            try:
+                valueNewton = eval(entryZValues.get())
+            except ValueError:
+                mb.showwarning('Wrong input', 'Value entered is not valid')
+                entryZValues.focus_set()
+                return
+        
+        
+
+        def button_pressed():  
+            setx()
+            sety()
+            answer = fc.newton_backward(xValueNewton,table,valueNewton)
+            mb.showinfo('yp value: ', answer, parent = self)
+
+  
+        
+
+
+        labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
+        labelX.config(font=("Courier", 11))
+        labelX.pack()        
+
+        entryXValues = Entry(self, width = 30, bg = "white")
+        entryXValues.pack()
+
+        labelY= Label(self, text = "Y Values Entries: ", bg = "black", fg = "white")
+        labelY.config(font=("Courier", 11))
+        labelY.pack()
+
+        entryYValues = Entry(self, width = 30, bg = "white")
+        entryYValues.pack()
+
+        labelZ= Label(self, text = "Value that needs to be found: ", bg = "black", fg = "white")
+        labelZ.config(font=("Courier", 11))
+        labelZ.pack()
+
+        entryZValues = Entry(self, width = 30, bg = "white")
+        entryZValues.pack()
+
+        button2 = Button(self, text = "Calculate the value of Y: ", bg = "black", fg = "white", width = 30, command = button_pressed)
+        button2.pack(padx = 10, pady = 5)
+        button2.config(font=("Courier", 12))
 
     #newton
 
