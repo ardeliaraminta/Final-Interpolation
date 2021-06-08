@@ -1,4 +1,3 @@
-
 """ Interpolation Computational Mathematics Final Project """ 
 
 import tkinter
@@ -313,23 +312,12 @@ class Langrange(Frame):
         buttonResult = Button(self, text = " boho ", bg = "DeepSkyBlue4", fg = "white", width = 25, command = button_pressed)
         buttonResult.pack(padx = 10, pady = 5)
         buttonResult.config(font=("Courier", 11))
-                
-
-
-        # ButtonY = Button(self, text = "Get Y Values",  command = setx)
-        # ButtonY.pack()
-
-        # ButtonX = Button(self, text = "Get X Values",  command = sety)
-        # ButtonX.pack()
-
-
-
-        # langrage interpolation 
 
         
-        buttonMain2 = Button(self, text = " Main Menu", bg = "DeepSkyBlue4", fg = "white", width = 25, command = lambda: master.switchFrame(mainMenu))
-        buttonMain2.pack(padx = 10, pady = 5)
-        buttonMain2.config(font=("Courier", 11))       
+        buttonMain = Button(self, text = " Main Menu", bg = "white", fg = "black", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain.pack(padx = 10, pady = 5)
+        buttonMain.config(font=("Courier", 12))
+         
 
 class NewtonForward(Frame):
     def __init__(self, master):
@@ -342,8 +330,9 @@ class NewtonForward(Frame):
              user has to enter values seperated by comma to create an array"""
             
             try:
-                xValueNewton = eval(entryXValues.get())
-                # to check if the value return
+                xValueNewton = entryXValues.get().split(",")
+                xValueNewton = [float(x) for x in xValueNewton]
+              # to check if the value return
                 mb.showinfo("X Values:", xValueNewton)
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
@@ -352,34 +341,52 @@ class NewtonForward(Frame):
 
         def sety():
             global yValueNewton
-            global valueNewton
+            global valueNewtonX
             global table
 
+
             try:
-                yValueNewton = eval(entryYValues.get())
+                yValueNewton = entryYValues.get().split(",")
+                yValueNewton = [float(x) for x in yValueNewton]
+                
                 table = [[0 for i in range(len(yValueNewton))]
                             for j in range(len(yValueNewton))]  
                 for i in range(len(yValueNewton)):
                     table[i][0] = yValueNewton[i]
                 mb.showinfo("Y Values:", yValueNewton)
+            
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryYValues.focus_set()
 
             try:
-                valueNewton = eval(entryZValues.get())
+                xpNewton= entryZValues.get()
             except ValueError:
                 mb.showwarning('Wrong input', 'Value entered is not valid')
                 entryZValues.focus_set()
                 return
+
         
         
 
         def button_pressed():  
             setx()
             sety()
-            answer = fc.newton_forward(xValueNewton,table,valueNewton)
+            answer = fc.newton_forward(xValueNewton,table,xpNewton)
             mb.showinfo('yp value: ', answer, parent = self)
+
+            f = Figure(figsize=(5,5), dpi = 100)
+            a = f.add_subplot(111)
+            a.plot((xValueNewton +[xpNewton]),(yValueNewton+[int(answer)]),'ro',(xValueNewton +[xpNewton]),(yValueNewton+[int(answer)]), 'b-')
+
+            canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
+            canvas.draw()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        
+            toolbar = NavigationToolbar2Tk(canvas, self)
+        
+            toolbar.update()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
   
         
@@ -408,7 +415,12 @@ class NewtonForward(Frame):
 
         button2 = Button(self, text = "The value of Y is: ", bg = "black", fg = "white", width = 30, command = button_pressed)
         button2.pack(padx = 10, pady = 5)
-        button2.config(font=("Courier", 12))     
+        button2.config(font=("Courier", 12))
+
+        
+        buttonMain = Button(self, text = " Main Menu", bg = "white", fg = "black", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain.pack(padx = 10, pady = 5)
+        buttonMain.config(font=("Courier", 12))     
 
 class NewtonBackward(Frame):
     def __init__(self, master):
@@ -421,8 +433,9 @@ class NewtonBackward(Frame):
              user has to enter values seperated by comma to create an array"""
             
             try:
-                xValueNewton = eval(entryXValues.get())
-                # to check if the value return
+                xValueNewton = entryXValues.get().split(",")
+                xValueNewton = [float(x) for x in xValueNewton]
+              # to check if the value return
                 mb.showinfo("X Values:", xValueNewton)
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
@@ -431,35 +444,52 @@ class NewtonBackward(Frame):
 
         def sety():
             global yValueNewton
-            global valueNewton
+            global valueNewtonX
             global table
 
+
             try:
-                yValueNewton = eval(entryYValues.get())
+                yValueNewton = entryYValues.get().split(",")
+                yValueNewton = [float(x) for x in yValueNewton]
+                
                 table = [[0 for i in range(len(yValueNewton))]
                             for j in range(len(yValueNewton))]  
                 for i in range(len(yValueNewton)):
                     table[i][0] = yValueNewton[i]
                 mb.showinfo("Y Values:", yValueNewton)
+            
             except ValueError:
                 mb.showwarning('Wrong input', 'value is not valid')
                 entryYValues.focus_set()
 
             try:
-                valueNewton = eval(entryZValues.get())
+                xpNewton= entryZValues.get()
             except ValueError:
                 mb.showwarning('Wrong input', 'Value entered is not valid')
                 entryZValues.focus_set()
                 return
+
         
         
 
         def button_pressed():  
             setx()
             sety()
-            answer = fc.newton_backward(xValueNewton,table,valueNewton)
+            answer = fc.newton_forward(xValueNewton,table,xpNewton)
             mb.showinfo('yp value: ', answer, parent = self)
 
+            f = Figure(figsize=(5,5), dpi = 100)
+            a = f.add_subplot(111)
+            a.plot((xValueNewton +[xpNewton]),(yValueNewton+[int(answer)]),'ro',(xValueNewton +[xpNewton]),(yValueNewton+[int(answer)]), 'b-')
+
+            canvas = FigureCanvasTkAgg(f, self)  # A tk.DrawingArea.
+            canvas.draw()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
+        
+            toolbar = NavigationToolbar2Tk(canvas, self)
+        
+            toolbar.update()
+            canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
   
         
 
@@ -488,15 +518,22 @@ class NewtonBackward(Frame):
         button2 = Button(self, text = "Calculate the value of Y: ", bg = "black", fg = "white", width = 30, command = button_pressed)
         button2.pack(padx = 10, pady = 5)
         button2.config(font=("Courier", 12))
+        
+        buttonMain = Button(self, text = " Main Menu", bg = "white", fg = "black", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain.pack(padx = 10, pady = 5)
+        buttonMain.config(font=("Courier", 12))
 
     #newton
 
 xValue = []
 yValue = []
 xp = 0
+
 xValueNewton = []
 yValueNewton = []
-valueNewton = 0
+valueNewtonX = 0
+xpNewton = 0
+
 sizexNewton = len(xValueNewton)
 sizeyNewton = len(yValueNewton)
 table = []
