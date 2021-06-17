@@ -10,9 +10,9 @@ Pre-requisites:
 Visual Studio Code with the Python plugin, or any IDE of your preference to edit Python code.
 Make sure the following Python packages are installed:
 
-1.tkinter
-2.numpy
-3.matplotlib ( graphing ) 
+1. tkinter
+2. numpy
+3. matplotlib
 
 Cloning the repo https://github.com/ardeliaraminta/Final-Interpolation
 
