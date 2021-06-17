@@ -3,7 +3,7 @@
 ##Installation 
 
 If you would like to use this application as a user, the easiest way is to clone the repository. 
-User Manual [Youtube](https://www.youtube.com/watch?v=YLkTs2W409U).
+User Manual [Final Interpolation User Guide ](https://www.youtube.com/watch?v=YLkTs2W409U).
 
 Pre-requisites:
 
