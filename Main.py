@@ -47,13 +47,13 @@ class mainMenu(Frame):
 
         label = Label(self, text = "Computational Mathematics"\
                       , bg = "DeepSkyBlue3", fg = "white")
+        label.config(font=("Courier", 20))
+        label.pack()
 
-        label.config(font=("Courier", 21))
-        label.pack(padx = 15, pady = 15)
-
+ 
         labelName = Label(self, text = "by Rohan, Raphael, and Ardelia", fg = 'white', bg = "DodgerBlue4")
-        labelName.config(font=("Courier", 10))
-        labelName.pack() 
+        labelName.config(font=("Courier", 11))
+        labelName.pack()    
        
         button0 = Button(self, text = "Linear Interpolation", bg = "black", fg = "white", width = 30, command = lambda: master.switchFrame(LinearInterpolation))
         button0.pack(padx = 10, pady = 5)
@@ -72,9 +72,15 @@ class mainMenu(Frame):
         button3.pack(padx = 10, pady = 5)
         button3.config(font=("Courier", 12))
 
-        button4 = Button(self, text = "Newton Backward",bg = "black", fg = "white",  width = 30, command = lambda: master.switchFrame(NewtonBackward))
+        button4 = Button(self, text = "Newton Backward",bg = "black", fg = "white",  width =30, command = lambda: master.switchFrame(NewtonBackward))
         button4.pack(padx = 10, pady = 5)
-        button4.config(font=("Courier", 12))        
+        button4.config(font=("Courier", 12))
+
+
+        button5 = Button(self, text = "About Us",bg = "black", fg = "white",  width = 40, height = 2, command = lambda: master.switchFrame(aboutUs))
+        button5.pack(padx = 10, pady = 5)
+        button5.config(font=("Courier", 12))   
+       
 
     def close(self):
         self.destroy()
@@ -86,6 +92,20 @@ class LinearInterpolation(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.config(bg = "DodgerBlue4")
+
+        labelName = Label(self, text = "Linear Interpolation", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 15))
+        labelName.pack() 
+
+        labelName = Label(self, text = " It helps in building new data points within the range of a discrete set of already known data points.", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 10))
+        labelName.pack() 
+        
+        labelName = Label(self, text = "Then this will give any required value of yp at a known value of xp.", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 10))
+        labelName.pack() 
+
+
 
         labelx0= Label(self, text = "Value of x0: ", bg = "DodgerBlue4", fg = "white")
         labelx0.config(font=("Courier", 10))
@@ -199,13 +219,6 @@ class LinearInterpolation(Frame):
         buttonMain.pack(padx = 10, pady = 5)
         buttonMain.config(font=("Courier", 12))
 
-
-class results(Frame):
-     def __init__(self, master):
-        Frame.__init__(self, master)
-        self.config(bg = "white")
-
-
 class Langrange(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
@@ -287,6 +300,10 @@ class Langrange(Frame):
             setx()
             sety()
             lagrange(len(xValue),xp, xValue, yValue)
+
+        label = Label(self, text = "Enter the values seperated by commas.(For eg:- 3,5,7,9,11) ", fg = 'white', bg = "DeepSkyBlue4")
+        label.config(font=("Courier", 10))
+        label.pack() 
         
         labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
         labelX.config(font=("Courier", 11))
@@ -309,7 +326,7 @@ class Langrange(Frame):
         entryxp = Entry(self, width = 30, bg = "white")
         entryxp.pack()
 
-        buttonResult = Button(self, text = " boho ", bg = "DeepSkyBlue4", fg = "white", width = 25, command = button_pressed)
+        buttonResult = Button(self, text = " Values ", bg = "DeepSkyBlue4", fg = "white", width = 25, command = button_pressed)
         buttonResult.pack(padx = 10, pady = 5)
         buttonResult.config(font=("Courier", 11))
 
@@ -391,6 +408,13 @@ class NewtonForward(Frame):
   
         
 
+        label = Label(self, text = "Enter the values seperated by commas.(For eg:- 3,5,7,9,11) ", fg = 'white', bg = "DeepSkyBlue4")
+        label.config(font=("Courier", 10))
+        label.pack()
+
+        label2 = Label(self, text = "The x values, entries should have the same intervals. For eg:- 2,4,6,8,10", fg = 'white', bg = "DeepSkyBlue4")
+        label2.config(font=("Courier", 10))
+        label2.pack() 
 
         labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
         labelX.config(font=("Courier", 11))
@@ -491,7 +515,13 @@ class NewtonBackward(Frame):
             toolbar.update()
             canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
   
-        
+        label = Label(self, text = "Enter the values seperated by commas.(For eg:- 3,5,7,9,11) ", fg = 'white', bg = "DeepSkyBlue4")
+        label.config(font=("Courier", 10))
+        label.pack()
+
+        label2 = Label(self, text = "The x values, entries should have the same intervals. For eg:- 2,4,6,8,10", fg = 'white', bg = "DeepSkyBlue4")
+        label2.config(font=("Courier", 10))
+        label2.pack() 
 
 
         labelX= Label(self, text = "X Values Entries: ", bg = "black", fg = "white")
@@ -522,6 +552,46 @@ class NewtonBackward(Frame):
         buttonMain = Button(self, text = " Main Menu", bg = "white", fg = "black", width = 25, command = lambda: master.switchFrame(mainMenu))
         buttonMain.pack(padx = 10, pady = 5)
         buttonMain.config(font=("Courier", 12))
+
+class aboutUs(Frame):
+    def __init__(self, master):
+        Frame.__init__(self, master)
+        self.config(bg = "black")   
+
+
+        labelName = Label(self, text = "Computational Mathematics Final Project : Interpolation", fg = 'white', bg = "DodgerBlue4")
+        labelName.config(font=("Courier", 15))
+        labelName.pack() 
+
+        labelName = Label(self, text = "For any inquiries, contact us: ", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 12))
+        labelName.pack() 
+
+        labelName = Label(self, text = "Sri Kalyan Rohan : kalyanrohan08@gmail.com ", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 10))
+        labelName.pack() 
+
+        labelName = Label(self, text = "Raphael Reynaldi : re.lydda20@gmail.com ", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 10))
+        labelName.pack() 
+
+        labelName = Label(self, text = "Ardelia Shaula Araminta : aramintaardelias@gmail.com ", fg = 'white', bg = "black")
+        labelName.config(font=("Courier", 10))
+        labelName.pack() 
+
+
+        
+
+        buttonMain = Button(self, text = " Main Menu", bg = "white", fg = "black", width = 25, command = lambda: master.switchFrame(mainMenu))
+        buttonMain.pack(padx = 10, pady = 5)
+        buttonMain.config(font=("Courier", 12))
+
+
+
+
+
+
+
 
     #newton
 
