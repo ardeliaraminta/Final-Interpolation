@@ -1,6 +1,6 @@
 # Final Project Computational Mathematics : Interpolation
 
-##Installation 
+## Installation 
 
 If you would like to use this application as a user, the easiest way is to clone the repository. 
 User Manual [Final Interpolation User Guide ](https://www.youtube.com/watch?v=YLkTs2W409U).
