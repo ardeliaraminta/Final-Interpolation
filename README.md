@@ -1,5 +1,7 @@
 # Final Project Computational Mathematics : Interpolation
 
+A program to experiment and explore the techniques used in interpolation using Python and tkinter. 
+
 ## Installation 
 
 If you would like to use this application as a user, the easiest way is to clone the repository. 
