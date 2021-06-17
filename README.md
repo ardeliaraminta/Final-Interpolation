@@ -1,6 +1,9 @@
 # Final Project Computational Mathematics : Interpolation
 
 A program to experiment and explore the techniques used in interpolation using Python and tkinter. 
+- Linear
+- Basic Lagrange 
+- Newton Forward and Backward
 
 ## Installation 
 
