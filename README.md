@@ -22,8 +22,14 @@ Make sure the following Python packages are installed:
 Cloning the repo https://github.com/ardeliaraminta/Final-Interpolation
 
 
+![2021-06-18 (3)](https://user-images.githubusercontent.com/71622783/122518658-ada74300-d03b-11eb-8c9d-e05ebca33ebb.png)
+![2021-06-18 (4)](https://user-images.githubusercontent.com/71622783/122518662-b0a23380-d03b-11eb-8d6a-198ccd0f38f2.png)
+
+
+
 Contributors:
 
 - Ardelia Araminta
 - Raphael Reynaldi
 - Sri Kalyan Rohan
+
